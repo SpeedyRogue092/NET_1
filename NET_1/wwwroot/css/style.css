@@ -1,0 +1,40 @@
+﻿body {
+    background: #f1e8ff;
+}
+
+.knopocka:link, .knopocka:visited {
+    color: #fcfcfc;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.knopocka:hover, .knopocka:active {
+    color: #d6a3ff;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+footer {
+    border-top: 1px solid #E0E0E0;
+    text-align: center;
+}
+
+.img-thumbnail {
+    border: 5px solid #d6a3ff;
+}
+
+.btn:link, .btn:visited {
+    border-color: #d6a3ff;
+    background-color: #d6a3ff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn:hover{
+    background-color: #cd8fff;
+}
+.btn.active {
+    background-color: #cd8fff;
+}

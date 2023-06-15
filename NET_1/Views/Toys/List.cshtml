@@ -1,0 +1,20 @@
+﻿<h1>Всі iграшки</h1>
+<h3>@Model.currCategory</h3>
+<div class="row mt-5 mb-2">
+	@{
+		foreach (var toy in Model.allToys)
+		{
+			<div class="col-lg-4">
+				<img class="img-thumbnail" src="@toy.img"
+					 alt="@toy.name" width="300" height="300" />
+				<h2>@toy.name</h2>
+				<p>@toy.shortDesc</p>
+				<p>Ціна: @toy.price.ToString() ₴</p>
+				<p>
+					<a class="btn"
+					   href="#">Детальніше</a>
+				</p>
+			</div>
+		}
+	}
+</div>
