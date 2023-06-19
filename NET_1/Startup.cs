@@ -10,28 +10,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using NET_1.Data.Repository;
+using NET_1.DB;
 
 namespace NET_1
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddTransient<IAllToys, MockToys>();
-            services.AddTransient<IToysCategory, MockCategory>();
-            services.AddMvc(mvcOtions => {mvcOtions.EnableEndpointRouting = false;});
-        }
+		private IConfigurationRoot _confString;
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment
+		[Obsolete]
+		public Startup(Microsoft.Extensions.Hosting.IHostingEnvironment hostEnv)
+		{
+		   _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
+		}
+		public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<IAllToys, ToyRepository>();
+            services.AddTransient<IToysCategory, CategoryRepository>();
+            services.AddMvc(mvcOtions => {mvcOtions.EnableEndpointRouting = false;});
+			services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
+
+		}
+
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment
         env)
         {
          app.UseDeveloperExceptionPage();
          app.UseStatusCodePages();
          app.UseStaticFiles();
          app.UseMvcWithDefaultRoute();
-         }
-    }
+		 using (var scope = app.ApplicationServices.CreateScope())
+		 {
+			AppDBContent content = scope.ServiceProvider.
+		    GetRequiredService<AppDBContent>();
+		 	DBObjects.Initial(content);
+		 }
+
+		}
+	}
 }

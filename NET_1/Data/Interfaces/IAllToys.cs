@@ -6,7 +6,7 @@ namespace NET_1.Data.Interfaces
     public interface IAllToys
     {
         IEnumerable<Toy> Toys { get; }
-        IEnumerable<Toy> getFavToys { get; set; }
+        IEnumerable<Toy> getFavToys { get;}
 
         Toy getObjectToy(int toyId);
 

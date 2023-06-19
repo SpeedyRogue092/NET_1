@@ -17,6 +17,7 @@
 footer {
     border-top: 1px solid #E0E0E0;
     text-align: center;
+
 }
 
 .img-thumbnail {
@@ -37,4 +38,13 @@ footer {
 }
 .btn.active {
     background-color: #cd8fff;
+}
+
+.setochka {
+
+    text-align: center;
+}
+
+.CategoryName{
+    margin-left: 2%
 }

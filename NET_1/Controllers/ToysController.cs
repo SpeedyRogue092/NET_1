@@ -16,11 +16,12 @@ namespace NET_1.Controllers
 
         public ViewResult List()
         {
-            ToysListViewModels obj = new ToysListViewModels();
+			ViewBag.Title = "Сторінка з іграшками";
+			ToysListViewModels obj = new ToysListViewModels();
             obj.allToys = _allToys.Toys;
             obj.currCategory = "Іграшки";
             return View(obj);
-            ViewBag.Title = "Сторінка з іграшками";
+			
 		}
 
     }
